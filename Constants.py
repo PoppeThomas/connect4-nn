@@ -1,0 +1,6 @@
+NB_COLUMNS = 7
+NB_ROWS = 6
+
+HUMAN = 1
+COMPUTER = -1
+EMPTY = 0
