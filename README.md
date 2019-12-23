@@ -14,7 +14,21 @@ The code was written on macOS Catalina using PyCharm and virtualenv, using Pytho
  - Tensorflow 2.0.0
  - pytest 5.3.2
 
-This is a work in progress, but all comments/tips are welcome.
+There are 3 files that are meant to be run:
+- connect4.py: play a game against the computer
+- learn.py: let the computer play itself and let it try to learn from it
+- simulate.py: show how the computer plays itself, to get a feel for its level
+
+Current state: after a few million games, the computer is still barely smarter than random playing.  Once it has been
+learning for a bit longer, I will update this file and check in the learned model.
+
+Mistakes I have made so far:
+- giving boards a score between -1 (loosing) and 1 (winning), but sigmoid (outputting between 0 and 1) in the last layer 
+  instead of tanh (outputting between -1 and 1)
+- not switching the "viewpoint" of the board states of the second player (see the "factor" in the GameGenerator code
+  and in the adapted board state in the NNStrategy.__predict_value method)
+
+This is a work in progress, but all comments/tips are welcome.  Please help me enlarge the list above :)
 You can mail me at firstname dot lastname at telenet dot be.
 
 Thomas Poppe

@@ -1,5 +1,5 @@
-from Board import Board
-from Constants import HUMAN, COMPUTER
+from game.Board import Board
+from game.Constants import HUMAN, COMPUTER
 
 
 def test_detect_win_vertical():

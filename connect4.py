@@ -1,10 +1,13 @@
+# Run this file to play a game against the strategy determined below.
 import sys
 import pygame
 
-from Game import Game
+from game.Game import Game
+from learning.NNStrategy import NNStrategy
 
-
-GAME = Game()
+STRATEGY = NNStrategy()
+STRATEGY.load_model()
+GAME = Game(True, STRATEGY, None)
 GAME.start()
 
 while True:

@@ -1,7 +1,7 @@
 import pygame
 import os
 
-from Constants import HUMAN, NB_COLUMNS, NB_ROWS
+from game.Constants import HUMAN, NB_COLUMNS, NB_ROWS
 
 
 pygame.init()
@@ -16,20 +16,21 @@ IMG_EMPTY = pygame.image.load(os.path.join('img', "empty.png")).convert()
 FONT = pygame.font.Font(None, 100)
 
 
+# All display logic (using pygame) is bundled in this class.  The game class drives the screen.
 class Screen:
 
     def __init__(self):
         pass
 
     @staticmethod
-    def __draw(image, col, row):
+    def __draw(image, row, col):
         SCREEN.blit(image, (col * COL_WIDTH, (NB_ROWS - row - 1) * ROW_HEIGHT))
 
     def draw_empty(self):
         pygame.display.set_caption("Connect 4")
         for col in range(NB_COLUMNS):
             for row in range(NB_ROWS):
-                self.__draw(IMG_EMPTY, col, row)
+                self.__draw(IMG_EMPTY, row, col)
         pygame.display.flip()
 
     @staticmethod
@@ -41,9 +42,9 @@ class Screen:
             return -1
         return col
 
-    def play(self, turn, col, row):
+    def play(self, turn, row, col):
         image = IMG_YELLOW if (turn == HUMAN) else IMG_RED
-        self.__draw(image, col, row)
+        self.__draw(image, row, col)
         pygame.display.flip()
 
     def display_win(self, turn):
