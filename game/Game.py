@@ -43,10 +43,11 @@ class Game:
         else:
             column_clicked = Screen.get_column(coordinate)
             if self.board.can_play(column_clicked):
-                done = self.__column_played(column_clicked)
+                done, _ = self.__column_played(column_clicked)
                 if not done:
                     self.let_computer_play()
 
+    # Returns if the game is done, and if it's a win or a tie
     def __column_played(self, col):
         self.nb_moves = self.nb_moves + 1
         row_played, win = self.board.play(self.turn, col)
@@ -55,19 +56,20 @@ class Game:
         if win:
             if self.show_moves:
                 self.screen.display_win(self.turn)
-            return True
+            return True, True
         elif self.board.finished:
             if self.show_moves:
                 self.screen.display_tie()
-            return True
+            return True, False
         else:
             self.__switch_turn()
-            return False
+            return False, False
 
     # This method gets called automatically when the computer needs to play.
     # You can also call it manually if you want to let the second playing strategy play for the human's turn.
+    # Returns if the game is done, and if it's a win or a tie
     def let_computer_play(self):
         strategy_to_play = self.strategy if self.turn == COMPUTER else self.other_strategy
         column_played = strategy_to_play.next_move(self.turn, self.board)
-        self.__column_played(column_played)
+        return self.__column_played(column_played)
 
