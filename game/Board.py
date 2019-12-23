@@ -21,12 +21,13 @@ class Board:
         win = self.detect_win(row, col)
         return row, win
 
-    # precondition: the given col has been played before
+    # precondition: the given col has just been played
     def undo(self, col):
         row = NB_ROWS - 1
         while self.state[row][col] == EMPTY:
             row = row-1
         self.state[row][col] = EMPTY
+        self.finished = False
 
     def detect_win(self, row, col):
         player = self.state[row][col]
