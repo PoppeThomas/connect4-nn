@@ -28,6 +28,8 @@ Mistakes I have made so far:
 - not switching the "viewpoint" of the board states of the second player (see the "factor" in the GameGenerator code
   and in the adapted board state in the NNStrategy.__predict_value method)
 - Ignoring tie games - now each player scores half a point for a tie game
+- Using binary_crossentropy loss (which is meant for classification, where this is a regression problem), and trying to 
+  measure accuracy (which was always 0).
 
 This is a work in progress, but all comments/tips are welcome.  Please help me enlarge the list above :)
 You can mail me at firstname dot lastname at telenet dot be.

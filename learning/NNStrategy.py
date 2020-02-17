@@ -34,7 +34,7 @@ class NNStrategy:
         new_model.add(Flatten())
         new_model.add(Dense(30, activation='relu'))
         new_model.add(Dense(1, activation='tanh'))
-        new_model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+        new_model.compile(optimizer='adam', loss='mean_squared_error')
         self.model = new_model
 
     # Given the n x 43 dimensional training data (n board states of 42 positions + a score), updates
@@ -56,7 +56,7 @@ class NNStrategy:
             adapted_board_state = -1 * board.state.copy().reshape(1, NB_ROWS, NB_COLUMNS, 1)
             return self.model.predict(adapted_board_state)
 
-    # Given that it's the given player's turn, return the column in which this strategy things it needs
+    # Given that it's the given player's turn, return the column in which this strategy thinks it needs
     # to play to maximize the next board state's value.
     def next_move(self, player, board):
         legal_moves = board.get_legal_moves()
